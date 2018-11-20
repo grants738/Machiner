@@ -5,6 +5,7 @@
 //  Created by Grant Savage on 11/18/18.
 //  Copyright © 2018 Grant Savage. All rights reserved.
 //
+// File for formula data structures
 
 import Foundation
 
