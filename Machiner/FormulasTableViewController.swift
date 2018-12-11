@@ -11,11 +11,23 @@ import UIKit
 
 class FormulasTableViewController: UITableViewController {
 	// Pre-defined formulas
-	var formulas = [
-		Formula(id: 1, title: "Add", expression: "a + b", inputs: ["A" : "a", "B" : "b"]),
-		Formula(id: 2, title: "Subtract", expression: "a - b", inputs: ["A" : "a", "B" : "b"]),
-		Formula(id: 3, title: "Multiply", expression: "a * b", inputs: ["Height" : "a", "Width" : "b"]),
-		Formula(id: 4, title: "Divide", expression: "a / b", inputs: ["A" : "a", "B" : "b"])
+	var formulas:[Formula] = [
+		Formula(
+			id: 1,
+			title: "RPM based on SFM",
+			expression: "(sfm)/(3.14159265359*0.08333*td)",
+			inputs: ["Surface Feet per Minute" : "sfm", "Tool Diameter" : "td"],
+			output: "RPM"
+		),
+		Formula(
+			id: 2,
+			title: "Feed Rate",
+			expression: "flutes * fpt * rpm",
+			inputs: ["Number of flutes" : "flutes", "Feed per Tooth" : "fpt", "RPM" : "rpm"],
+			output: "Inches per Minute"
+		),
+		Formula(id: 3, title: "Multiply", expression: "a * b", inputs: ["Height" : "a", "Width" : "b"], output: ""),
+		Formula(id: 4, title: "Divide", expression: "a / b", inputs: ["A" : "a", "B" : "b"], output: "")
 	]
 
 	// Perform tableView configuration and formula retrieval from storage
@@ -70,6 +82,8 @@ class FormulasTableViewController: UITableViewController {
 		formulas.insert(movedObject, at: destinationIndexPath.row)
 		
 		UserDefaults.standard.set(try? PropertyListEncoder().encode(formulas), forKey: "formulas")
+		
+		print("Formula order saved")
 	}
 	
 	// Editing mode configuration

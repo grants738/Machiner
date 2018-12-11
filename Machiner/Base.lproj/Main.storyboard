@@ -77,29 +77,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aog-Fl-v0E">
-                                <rect key="frame" x="148" y="335" width="79" height="35"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="Calculate"/>
-                                <connections>
-                                    <action selector="calculate:" destination="Qe8-Vu-BeI" eventType="touchUpInside" id="ygZ-zf-9yl"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Zg-hH-LUc">
-                                <rect key="frame" x="16" y="422" width="343" height="28"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <rect key="frame" x="16" y="579" width="343" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="2Zg-hH-LUc" firstAttribute="trailing" secondItem="bTW-xQ-Zd7" secondAttribute="trailingMargin" id="0Rq-eY-MIW"/>
-                            <constraint firstItem="2Zg-hH-LUc" firstAttribute="leading" secondItem="bTW-xQ-Zd7" secondAttribute="leadingMargin" id="Yjc-UE-74X"/>
-                            <constraint firstItem="Aog-Fl-v0E" firstAttribute="top" secondItem="Am6-Gd-40q" secondAttribute="top" constant="335" id="Zya-bv-oW1"/>
-                            <constraint firstItem="Aog-Fl-v0E" firstAttribute="centerX" secondItem="2Zg-hH-LUc" secondAttribute="centerX" id="cGT-eb-q2n"/>
-                            <constraint firstItem="2Zg-hH-LUc" firstAttribute="top" secondItem="Aog-Fl-v0E" secondAttribute="bottom" constant="52" id="pce-QW-w2a"/>
-                            <constraint firstItem="Aog-Fl-v0E" firstAttribute="leading" secondItem="Am6-Gd-40q" secondAttribute="leading" constant="148" id="tjJ-dM-EA5"/>
+                            <constraint firstItem="2Zg-hH-LUc" firstAttribute="top" secondItem="Am6-Gd-40q" secondAttribute="top" constant="579" id="ClN-yd-174"/>
+                            <constraint firstItem="2Zg-hH-LUc" firstAttribute="trailing" secondItem="bTW-xQ-Zd7" secondAttribute="trailingMargin" id="b64-jp-8jc"/>
+                            <constraint firstItem="2Zg-hH-LUc" firstAttribute="leading" secondItem="bTW-xQ-Zd7" secondAttribute="leadingMargin" id="snj-UR-pI1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Am6-Gd-40q"/>
                     </view>

@@ -14,11 +14,12 @@ class FormulaViewController: UIViewController {
 	var formula: Formula!
 	
 	// Global position values for rendering text fields
-	let xPos : CGFloat = 50
-	var yPos : CGFloat = 80
+	let xPos : CGFloat = 30
+	var yPos : CGFloat = 30
 	
 	// Dictionary of text fields and their respective descriptions
 	var inputs : [String : UITextField] = [:]
+	var errors : [String : UILabel] = [:]
 	
 	// Label for displaying result of computation
 	@IBOutlet weak var resultLabel: UILabel!
@@ -32,38 +33,59 @@ class FormulaViewController: UIViewController {
 		
         // Loop through formula's inputs and render them in the view
 		for input in formula.inputs {
-			yPos += 90
+			yPos += 120 //Total width of field and labels
 			
 			// Init new text field and label
-			let tf = UITextField()
-			let label = UILabel()
+			let inputField = UITextField()
+			let descriptionLabel = UILabel(), helpLabel = UILabel()
 			
 			// Set positioning of text field and label
-			tf.frame = CGRect(x: xPos, y: yPos, width: 200, height: 40)
-			label.frame = CGRect(x: xPos, y: yPos - 45, width: 200, height: 40)
+			inputField.frame = CGRect(x: xPos, y: yPos, width: 150, height: 40)
+			descriptionLabel.frame = CGRect(x: xPos, y: yPos - 45, width: 200, height: 40)
+			helpLabel.frame = CGRect(x: xPos, y: yPos + 40, width: 200, height: 40)
 			
 			// Set the text of the label equal to the input's description
-			label.text = input.key
+			descriptionLabel.text = input.key
+			helpLabel.text = "\(input.key) field is required."
+			helpLabel.textColor = .red
+			helpLabel.isHidden = true
 			
 			// Text field styling
-			tf.layer.cornerRadius = 5
-			tf.layer.borderWidth = 1
+			inputField.layer.cornerRadius = 5
+			inputField.layer.borderWidth = 1
+			let leftPadding = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 40))
+			inputField.leftView = leftPadding
+			inputField.leftViewMode = .always
 			
 			// Keyboard configuration
-			tf.keyboardType = .decimalPad
+			let keyboardToolBar: UIToolbar = UIToolbar()
+			keyboardToolBar.barStyle = .default
+			keyboardToolBar.items = [
+				UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(FormulaViewController.cancel)),
+				UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+				UIBarButtonItem(title: "Calculate", style: .plain, target: self, action: #selector(FormulaViewController.calculate))
+			]
+			keyboardToolBar.sizeToFit()
+			inputField.inputAccessoryView = keyboardToolBar
+			inputField.keyboardType = .decimalPad
 			
 			// Add fields to the view
-			self.view.addSubview(tf)
-			self.view.addSubview(label)
+			self.view.addSubview(inputField)
+			self.view.addSubview(descriptionLabel)
+			self.view.addSubview(helpLabel)
 			
 			// Add the text field to the local input dictionary
-			inputs[input.value] = tf
+			inputs[input.value] = inputField
+			errors[input.value] = helpLabel
 		}
 		
     }
 	
-	// Handle the calculation button event
-	@IBAction func calculate(_ sender: Any) {
+	@objc func cancel() {
+		view.endEditing(true)
+	}
+	
+	@objc func calculate() {
 		// Init new dictionary
 		var intDictionary : [String : Double] = [:]
 		
@@ -75,9 +97,12 @@ class FormulaViewController: UIViewController {
 			// Check if value exists
 			if let value = Double(input.value.text!) {
 				intDictionary[input.key] = value
+				input.value.layer.borderColor = UIColor.black.cgColor
+				errors[input.key]?.isHidden = true
 			} else {
 				fieldEmpty = true
 				input.value.layer.borderColor = UIColor.red.cgColor
+				errors[input.key]?.isHidden = false
 			}
 		}
 		
@@ -85,13 +110,15 @@ class FormulaViewController: UIViewController {
 		if (fieldEmpty) {
 			return
 		}
-
+		
 		// Use the expression of the formula and the grabbed values to evaluate the expression
-		if let result = formula.expression.numericalExpression.expressionValue(with: intDictionary, context: nil) as? Double {
-			resultLabel.text = String(result)
+		if var result = formula.expression.numericalExpression.expressionValue(with: intDictionary, context: nil) as? Double {
+			result.round()
+			print(result)
+			resultLabel.text = "\(String(format: "%.0f", result)) \(formula.output)"
 			view.endEditing(true)
 		} else {
-		  	print("Calculation Failed")
+			print("Calculation Failed")
 		}
 	}
 

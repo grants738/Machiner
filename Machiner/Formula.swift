@@ -15,6 +15,7 @@ public struct Formula:Codable {
 	var title: String
 	var expression: String
 	var inputs: [String : String]
+	var output: String
 }
 
 public extension String {
