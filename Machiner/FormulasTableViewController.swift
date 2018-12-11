@@ -17,17 +17,19 @@ class FormulasTableViewController: UITableViewController {
 			title: "RPM based on SFM",
 			expression: "(sfm)/(3.14159265359*0.08333*td)",
 			inputs: ["Surface Feet per Minute" : "sfm", "Tool Diameter" : "td"],
-			output: "RPM"
+			output: "RPM",
+			imageName: ""
 		),
 		Formula(
 			id: 2,
 			title: "Feed Rate",
 			expression: "flutes * fpt * rpm",
 			inputs: ["Number of flutes" : "flutes", "Feed per Tooth" : "fpt", "RPM" : "rpm"],
-			output: "Inches per Minute"
+			output: "Inches per Minute",
+			imageName: "ChipThinningDiagram"
 		),
-		Formula(id: 3, title: "Multiply", expression: "a * b", inputs: ["Height" : "a", "Width" : "b"], output: ""),
-		Formula(id: 4, title: "Divide", expression: "a / b", inputs: ["A" : "a", "B" : "b"], output: "")
+		Formula(id: 3, title: "Multiply", expression: "a * b", inputs: ["Height" : "a", "Width" : "b"], output: "", imageName: ""),
+		Formula(id: 4, title: "Divide", expression: "a / b", inputs: ["A" : "a", "B" : "b"], output: "", imageName: "")
 	]
 
 	// Perform tableView configuration and formula retrieval from storage

@@ -78,7 +78,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Zg-hH-LUc">
-                                <rect key="frame" x="16" y="579" width="343" height="42"/>
+                                <rect key="frame" x="16" y="485" width="343" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -86,7 +86,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="2Zg-hH-LUc" firstAttribute="top" secondItem="Am6-Gd-40q" secondAttribute="top" constant="579" id="ClN-yd-174"/>
+                            <constraint firstItem="2Zg-hH-LUc" firstAttribute="top" secondItem="Am6-Gd-40q" secondAttribute="top" constant="485" id="ClN-yd-174"/>
                             <constraint firstItem="2Zg-hH-LUc" firstAttribute="trailing" secondItem="bTW-xQ-Zd7" secondAttribute="trailingMargin" id="b64-jp-8jc"/>
                             <constraint firstItem="2Zg-hH-LUc" firstAttribute="leading" secondItem="bTW-xQ-Zd7" secondAttribute="leadingMargin" id="snj-UR-pI1"/>
                         </constraints>
