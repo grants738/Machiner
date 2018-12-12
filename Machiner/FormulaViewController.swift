@@ -83,8 +83,8 @@ class FormulaViewController: UIViewController {
 			
 			if (!inputFirstResponder) {
 				inputField.becomeFirstResponder()
+				inputFirstResponder = true
 			}
-			inputFirstResponder = true
 
 			// Add fields to the view
 			scrollView.addSubview(inputField)
@@ -96,10 +96,6 @@ class FormulaViewController: UIViewController {
 			errors[input.value] = helpLabel
 		}
     }
-	
-	@objc func cancel() {
-		view.endEditing(true)
-	}
 	
 	@objc func calculate() {
 		// Init new dictionary
