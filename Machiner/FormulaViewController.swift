@@ -33,7 +33,7 @@ class FormulaViewController: UIViewController {
 		
 		let scrollView = UIScrollView()
 		scrollView.frame = CGRect(x: 0, y: 87, width: self.view.bounds.maxX, height: 390)
-		scrollView.contentSize = CGSize(width: Int(view.bounds.maxX), height: (formula.inputs.count * 110) + 200)
+		scrollView.contentSize = CGSize(width: Int(view.bounds.maxX), height: (formula.inputs.count * 130) + 220)
 		view.addSubview(scrollView)
 		
 		let image = UIImageView()
@@ -45,7 +45,7 @@ class FormulaViewController: UIViewController {
 		yPos+=160
         // Loop through formula's inputs and render them in the view
 		for input in formula.inputs {
-			yPos += 100 //Total width of field and labels
+			yPos += 120 //Total width of field and labels
 
 			// Init new text field and label
 			let inputField = UITextField()
@@ -125,9 +125,12 @@ class FormulaViewController: UIViewController {
 		
 		// Use the expression of the formula and the grabbed values to evaluate the expression
 		if var result = formula.expression.numericalExpression.expressionValue(with: intDictionary, context: nil) as? Double {
-			result.round()
+			
+			if (formula.precision == 0) {
+				result.round()
+			}
 			print(result)
-			resultLabel.text = "\(String(format: "%.0f", result)) \(formula.output)"
+			resultLabel.text = "\(String(format: "%.\(formula.precision)f", result)) \(formula.output)"
 			view.endEditing(true)
 		} else {
 			print("Calculation Failed")

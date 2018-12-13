@@ -18,7 +18,8 @@ class FormulasTableViewController: UITableViewController {
 			expression: "(sfm)/(3.14159265359*0.08333*td)",
 			inputs: ["Surface Feet per Minute" : "sfm", "Tool Diameter" : "td"],
 			output: "RPM",
-			imageName: ""
+			imageName: "",
+			precision: 0
 		),
 		Formula(
 			id: 2,
@@ -26,10 +27,18 @@ class FormulasTableViewController: UITableViewController {
 			expression: "flutes * fpt * rpm",
 			inputs: ["Number of flutes" : "flutes", "Feed per Tooth" : "fpt", "RPM" : "rpm"],
 			output: "Inches per Minute",
-			imageName: "ChipThinningDiagram"
+			imageName: "FeedRateDiagram",
+			precision: 0
 		),
-		Formula(id: 3, title: "Multiply", expression: "a * b", inputs: ["Height" : "a", "Width" : "b"], output: "", imageName: ""),
-		Formula(id: 4, title: "Divide", expression: "a / b", inputs: ["A" : "a", "B" : "b"], output: "", imageName: "")
+		Formula(
+			id: 3,
+			title: "Chip Thinning",
+			expression: "((0.5*(td/rdoc))/(sqrt(td/rdoc)-1)) * ct",
+			inputs: ["Chip Thickness" : "ct", "Tool Diameter" : "td", "Radial Depth of Cut" : "rdoc"],
+			output: "IPT",
+			imageName: "ChipThinningDiagram",
+			precision: 4
+		)
 	]
 
 	// Perform tableView configuration and formula retrieval from storage
@@ -51,7 +60,7 @@ class FormulasTableViewController: UITableViewController {
 			// Decode formulas and set globally available formulas to decoded formulas
 			if let decodedFormulas = try? PropertyListDecoder().decode(Array<Formula>.self, from: storedFormulas) {
 				print("Stored formulas found")
-				formulas = decodedFormulas
+				//formulas = decodedFormulas
 			} else {
 				print("Error decoding formulas")
 			}

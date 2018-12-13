@@ -17,6 +17,7 @@ public struct Formula:Codable {
 	var inputs: [String : String]
 	var output: String
 	var imageName: String
+	var precision: Int
 }
 
 public extension String {
