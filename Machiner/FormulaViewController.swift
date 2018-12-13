@@ -24,6 +24,8 @@ class FormulaViewController: UIViewController {
 	// Label for displaying result of computation
 	@IBOutlet weak var resultLabel: UILabel!
 	
+	var fieldIndex: Int = 0
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -34,6 +36,7 @@ class FormulaViewController: UIViewController {
 		let scrollView = UIScrollView()
 		scrollView.frame = CGRect(x: 0, y: 87, width: self.view.bounds.maxX, height: 390)
 		scrollView.contentSize = CGSize(width: Int(view.bounds.maxX), height: (formula.inputs.count * 130) + 220)
+		//scrollView.backgroundColor = UIColor(red: 220/255, green: 218/255, blue: 227/255, alpha: 1.0)
 		view.addSubview(scrollView)
 		
 		let image = UIImageView()
@@ -46,7 +49,7 @@ class FormulaViewController: UIViewController {
         // Loop through formula's inputs and render them in the view
 		for input in formula.inputs {
 			yPos += 120 //Total width of field and labels
-
+			
 			// Init new text field and label
 			let inputField = UITextField()
 			let descriptionLabel = UILabel(), helpLabel = UILabel()
@@ -68,14 +71,25 @@ class FormulaViewController: UIViewController {
 			let leftPadding = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 40))
 			inputField.leftView = leftPadding
 			inputField.leftViewMode = .always
+			
+			let calcButton = UIButton()
+			calcButton.backgroundColor = UIColor(red: 18/255, green: 127/255, blue: 191/255, alpha: 1.0)
+			calcButton.setTitle("Calculate", for: .normal)
+			calcButton.setTitleColor(.white, for: .normal)
+			calcButton.layer.cornerRadius = 3
+			calcButton.contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 15.0, bottom: 10.0, right: 15.0)
+			calcButton.addTarget(self, action: #selector(FormulaViewController.calculate), for: .touchUpInside)
 
 			// Keyboard configuration
 			let keyboardToolBar: UIToolbar = UIToolbar()
 			keyboardToolBar.barStyle = .default
+			keyboardToolBar.tintColor = .black
+			//keyboardToolBar.barTintColor = UIColor(red: 220/255, green: 218/255, blue: 227/255, alpha: 1.0)
 			keyboardToolBar.items = [
-				//UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(FormulaViewController.cancel)),
+				//UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(FormulaViewController.nextField)),
 				UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
-				UIBarButtonItem(title: "Calculate", style: .plain, target: self, action: #selector(FormulaViewController.calculate))
+				//UIBarButtonItem(title: "Calculate", style: .plain, target: self, action: #selector(FormulaViewController.calculate))
+				UIBarButtonItem(customView: calcButton)
 			]
 			keyboardToolBar.sizeToFit()
 			inputField.inputAccessoryView = keyboardToolBar

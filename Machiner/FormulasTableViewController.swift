@@ -27,16 +27,16 @@ class FormulasTableViewController: UITableViewController {
 			expression: "flutes * fpt * rpm",
 			inputs: ["Number of flutes" : "flutes", "Feed per Tooth" : "fpt", "RPM" : "rpm"],
 			output: "Inches per Minute",
-			imageName: "FeedRateDiagram",
+			imageName: "FeedRateDiagram 2",
 			precision: 0
 		),
 		Formula(
 			id: 3,
 			title: "Chip Thinning",
-			expression: "((0.5*(td/rdoc))/(sqrt(td/rdoc)-1)) * ct",
+			expression: "((0.5*(td/rdoc))/(sqrt((td/rdoc)-1))) * ct",
 			inputs: ["Chip Thickness" : "ct", "Tool Diameter" : "td", "Radial Depth of Cut" : "rdoc"],
 			output: "IPT",
-			imageName: "ChipThinningDiagram",
+			imageName: "ChipThinningDiagram 2",
 			precision: 4
 		)
 	]
@@ -44,7 +44,10 @@ class FormulasTableViewController: UITableViewController {
 	// Perform tableView configuration and formula retrieval from storage
     override func viewDidLoad() {
         super.viewDidLoad()
-
+		//self.navigationController?.navigationBar.tintColor =
+		//self.navigationController?.navigationBar.tintColor = .black
+		//self.navigationController?.navigationBar.barTintColor = UIColor(red: 63/255, green: 63/255, blue: 63/255, alpha: 1.0)
+		//self.tableView.backgroundColor = UIColor(red: 63/255, green: 63/255, blue: 63/255, alpha: 1.0)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -79,7 +82,7 @@ class FormulasTableViewController: UITableViewController {
 	// Render each cell in the table
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "formulaCell", for: indexPath)
-
+		//cell.backgroundColor = UIColor(red: 63/255, green: 63/255, blue: 63/255, alpha: 1.0)
 		let formula = formulas[indexPath.row]
 		cell.textLabel?.text = formula.title
 
